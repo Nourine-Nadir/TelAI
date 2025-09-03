@@ -77,7 +77,7 @@ class FederatedLearningServer:
                 xb, yb = xb.to(self.device), yb.to(self.device)
 
                 optimizer.zero_grad()
-                preds = model(xb)
+                preds, _ = model(xb)
                 loss = criterion(preds, yb)
                 loss.backward()
                 optimizer.step()

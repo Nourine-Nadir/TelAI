@@ -17,7 +17,7 @@ def train_model(train_dl, val_dl, input_dim, epochs=10, lr=1e-3, device="cuda"):
         for xb, yb in train_dl:
             xb, yb = xb.to(device), yb.to(device)
             opt.zero_grad()
-            preds = model(xb)
+            preds, _ = model(xb)
             loss = criterion(preds, yb)
             loss.backward()
             opt.step()
@@ -58,7 +58,7 @@ def train_client_model(model, dataloader, epochs=1, lr=1e-4, device="cuda"):
             xb, yb = xb.to(device), yb.to(device)
 
             optimizer.zero_grad()
-            preds = model(xb)
+            preds, _ = model(xb)
             loss = criterion(preds, yb)
             loss.backward()
             optimizer.step()

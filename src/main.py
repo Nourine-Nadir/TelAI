@@ -2,7 +2,7 @@ from utils import preprocess_unsw, FlowDataset
 from test import evaluate_model
 from train import train_model
 from federated import FederatedLearningServer, create_client_dataloaders
-from models import AnomalyTransformer
+from models import AnomalyTransformer, AnomalyAwareTransformer
 from torch.utils.data import random_split, DataLoader
 import torch
 from tqdm import tqdm
@@ -56,7 +56,7 @@ def main_federated():
     client_dataloaders = create_client_dataloaders(train_ds, num_clients, batch_size=512)
 
     # Initialize global model
-    global_model = AnomalyTransformer(input_dim=X.shape[2]).to(device)
+    global_model = AnomalyAwareTransformer(input_dim=X.shape[2]).to(device)
 
     # Initialize federated learning server
     server = FederatedLearningServer(global_model, num_clients, device)
@@ -75,7 +75,7 @@ def main_federated():
             with torch.no_grad():
                 for xb, yb in val_dl:
                     xb, yb = xb.to(device), yb.to(device)
-                    preds = server.global_model(xb)
+                    preds, _ = server.global_model(xb)
                     val_correct += (preds.argmax(1) == yb).sum().item()
                     val_samples += xb.size(0)
 

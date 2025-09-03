@@ -9,7 +9,7 @@ def evaluate_model(model, dataloader, device="cuda"):
     with torch.no_grad():
         for xb, yb in dataloader:
             xb, yb = xb.to(device), yb.to(device)
-            preds = model(xb)
+            preds, _ = model(xb)
             all_preds.extend(preds.argmax(1).cpu().numpy())
             all_labels.extend(yb.cpu().numpy())
 
