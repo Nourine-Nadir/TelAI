@@ -7,7 +7,7 @@ A PyTorch implementation of federated learning for network anomaly detection usi
 ![Federated Learning](https://img.shields.io/badge/Federated%20Learning-Enabled-green)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
-## 📖 Overview
+## 📖 Overview 
 
 This project implements a federated learning framework for network intrusion detection using a Transformer-based model. The system can operate in both centralized and federated learning modes, allowing for privacy-preserving collaborative training across multiple data silos without sharing raw data.
 

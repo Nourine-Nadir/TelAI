@@ -92,7 +92,7 @@ class FederatedLearningServer:
 
 def create_client_dataloaders(dataset, num_clients, batch_size=512):
     """Split dataset into multiple clients"""
-    
+
     # Split dataset among clients
     client_sizes = [len(dataset) // num_clients] * num_clients
     client_sizes[-1] += len(dataset) - sum(client_sizes)  # Handle remainder
