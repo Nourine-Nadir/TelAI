@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import torch
 from torch.utils.data import Dataset
+from sklearn.preprocessing import LabelEncoder
 
 
 def preprocess_unsw(path, seq_len=50):
@@ -10,13 +11,17 @@ def preprocess_unsw(path, seq_len=50):
     # Extract labels
     if "attack_cat" in df.columns:
         y = df["label"].astype(int).values  # 0 = normal, 1 = attack
-        df = df.drop(["attack_cat", "label"], axis=1)
+        df = df.drop(["attack_cat", "label", 'id'], axis=1)
     else:
         y = np.zeros(len(df))
 
+    for col in ["proto", "service", "state"]:
+        if col in df.columns:
+            le = LabelEncoder()
+            df[col] = le.fit_transform(df[col].astype(str))
+
     # Keep only numeric features
     X = df.select_dtypes(include=[np.number]).fillna(0).values
-
     # Normalize
     X = (X - X.mean(axis=0)) / (X.std(axis=0) + 1e-8)
 

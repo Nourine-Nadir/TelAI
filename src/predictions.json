@@ -1,92 +1,902 @@
 [
   {
     "sequence_id": 0,
-    "true_label": 1,
+    "true_label": 0,
     "predicted_label": 0,
-    "confidence": 0.8648250699043274,
-    "normal_probability": 0.8648250699043274,
-    "attack_probability": 0.13517487049102783,
-    "anomaly_score": 0.6519062519073486
+    "confidence": 0.9999920129776001,
+    "normal_probability": 0.9999920129776001,
+    "attack_probability": 7.960477887536399e-06,
+    "anomaly_score": 0.9646943807601929
   },
   {
     "sequence_id": 1,
     "true_label": 1,
     "predicted_label": 1,
-    "confidence": 0.9439536929130554,
-    "normal_probability": 0.05604628473520279,
-    "attack_probability": 0.9439536929130554,
-    "anomaly_score": 0.7061307430267334
+    "confidence": 0.9999960660934448,
+    "normal_probability": 3.982163434557151e-06,
+    "attack_probability": 0.9999960660934448,
+    "anomaly_score": 0.9708369970321655
   },
   {
     "sequence_id": 2,
     "true_label": 1,
     "predicted_label": 1,
-    "confidence": 0.9307727217674255,
-    "normal_probability": 0.0692271962761879,
-    "attack_probability": 0.9307727217674255,
-    "anomaly_score": 0.6768704652786255
+    "confidence": 0.9985948204994202,
+    "normal_probability": 0.0014051186153665185,
+    "attack_probability": 0.9985948204994202,
+    "anomaly_score": 0.9048951268196106
   },
   {
     "sequence_id": 3,
     "true_label": 1,
     "predicted_label": 1,
-    "confidence": 0.8005772233009338,
-    "normal_probability": 0.19942283630371094,
-    "attack_probability": 0.8005772233009338,
-    "anomaly_score": 0.6364824175834656
+    "confidence": 0.9974331259727478,
+    "normal_probability": 0.0025668262969702482,
+    "attack_probability": 0.9974331259727478,
+    "anomaly_score": 0.660545289516449
   },
   {
     "sequence_id": 4,
     "true_label": 1,
     "predicted_label": 1,
-    "confidence": 0.9513083100318909,
-    "normal_probability": 0.04869172349572182,
-    "attack_probability": 0.9513083100318909,
-    "anomaly_score": 0.6867927312850952
+    "confidence": 0.9994244575500488,
+    "normal_probability": 0.0005755295278504491,
+    "attack_probability": 0.9994244575500488,
+    "anomaly_score": 0.8198660612106323
   },
   {
     "sequence_id": 5,
     "true_label": 0,
     "predicted_label": 0,
-    "confidence": 0.9200083017349243,
-    "normal_probability": 0.9200083017349243,
-    "attack_probability": 0.07999175041913986,
-    "anomaly_score": 0.6267549395561218
+    "confidence": 0.9999924898147583,
+    "normal_probability": 0.9999924898147583,
+    "attack_probability": 7.530029506597202e-06,
+    "anomaly_score": 0.9665502309799194
   },
   {
     "sequence_id": 6,
     "true_label": 1,
     "predicted_label": 1,
-    "confidence": 0.9379409551620483,
-    "normal_probability": 0.06205900385975838,
-    "attack_probability": 0.9379409551620483,
-    "anomaly_score": 0.6843938827514648
+    "confidence": 0.9477877616882324,
+    "normal_probability": 0.05221223458647728,
+    "attack_probability": 0.9477877616882324,
+    "anomaly_score": 0.669571578502655
   },
   {
     "sequence_id": 7,
     "true_label": 0,
     "predicted_label": 0,
-    "confidence": 0.9204613566398621,
-    "normal_probability": 0.9204613566398621,
-    "attack_probability": 0.07953868061304092,
-    "anomaly_score": 0.6365659236907959
+    "confidence": 0.9999903440475464,
+    "normal_probability": 0.9999903440475464,
+    "attack_probability": 9.662183401815128e-06,
+    "anomaly_score": 0.9636489152908325
   },
   {
     "sequence_id": 8,
-    "true_label": 1,
-    "predicted_label": 1,
-    "confidence": 0.9426092505455017,
-    "normal_probability": 0.0573907345533371,
-    "attack_probability": 0.9426092505455017,
-    "anomaly_score": 0.7044426202774048
+    "true_label": 0,
+    "predicted_label": 0,
+    "confidence": 0.9999935626983643,
+    "normal_probability": 0.9999935626983643,
+    "attack_probability": 6.440548986574868e-06,
+    "anomaly_score": 0.969678521156311
   },
   {
     "sequence_id": 9,
     "true_label": 1,
     "predicted_label": 1,
-    "confidence": 0.9360783100128174,
-    "normal_probability": 0.06392171233892441,
-    "attack_probability": 0.9360783100128174,
-    "anomaly_score": 0.678997814655304
+    "confidence": 0.9999971389770508,
+    "normal_probability": 2.879792191379238e-06,
+    "attack_probability": 0.9999971389770508,
+    "anomaly_score": 0.9770323038101196
+  },
+  {
+    "sequence_id": 10,
+    "true_label": 0,
+    "predicted_label": 0,
+    "confidence": 0.9999910593032837,
+    "normal_probability": 0.9999910593032837,
+    "attack_probability": 8.885342140274588e-06,
+    "anomaly_score": 0.9649346470832825
+  },
+  {
+    "sequence_id": 11,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9939121007919312,
+    "normal_probability": 0.006087972316890955,
+    "attack_probability": 0.9939121007919312,
+    "anomaly_score": 0.6796904802322388
+  },
+  {
+    "sequence_id": 12,
+    "true_label": 0,
+    "predicted_label": 0,
+    "confidence": 0.9999896287918091,
+    "normal_probability": 0.9999896287918091,
+    "attack_probability": 1.0418430065328721e-05,
+    "anomaly_score": 0.9605033993721008
+  },
+  {
+    "sequence_id": 13,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9999946355819702,
+    "normal_probability": 5.3314092838263605e-06,
+    "attack_probability": 0.9999946355819702,
+    "anomaly_score": 0.9841483235359192
+  },
+  {
+    "sequence_id": 14,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9953622221946716,
+    "normal_probability": 0.004637745674699545,
+    "attack_probability": 0.9953622221946716,
+    "anomaly_score": 0.9273049235343933
+  },
+  {
+    "sequence_id": 15,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.976714015007019,
+    "normal_probability": 0.023286020383238792,
+    "attack_probability": 0.976714015007019,
+    "anomaly_score": 0.8034351468086243
+  },
+  {
+    "sequence_id": 16,
+    "true_label": 1,
+    "predicted_label": 0,
+    "confidence": 0.8869804739952087,
+    "normal_probability": 0.8869804739952087,
+    "attack_probability": 0.11301954835653305,
+    "anomaly_score": 0.6338303685188293
+  },
+  {
+    "sequence_id": 17,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9999921321868896,
+    "normal_probability": 7.839896170480642e-06,
+    "attack_probability": 0.9999921321868896,
+    "anomaly_score": 0.9712769389152527
+  },
+  {
+    "sequence_id": 18,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9999935626983643,
+    "normal_probability": 6.482277967734262e-06,
+    "attack_probability": 0.9999935626983643,
+    "anomaly_score": 0.972091019153595
+  },
+  {
+    "sequence_id": 19,
+    "true_label": 1,
+    "predicted_label": 0,
+    "confidence": 0.5076588988304138,
+    "normal_probability": 0.5076588988304138,
+    "attack_probability": 0.49234116077423096,
+    "anomaly_score": 0.6540579795837402
+  },
+  {
+    "sequence_id": 20,
+    "true_label": 0,
+    "predicted_label": 0,
+    "confidence": 0.9999929666519165,
+    "normal_probability": 0.9999929666519165,
+    "attack_probability": 7.039563115540659e-06,
+    "anomaly_score": 0.9659914970397949
+  },
+  {
+    "sequence_id": 21,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9945741295814514,
+    "normal_probability": 0.005425919312983751,
+    "attack_probability": 0.9945741295814514,
+    "anomaly_score": 0.9115697741508484
+  },
+  {
+    "sequence_id": 22,
+    "true_label": 1,
+    "predicted_label": 0,
+    "confidence": 0.8959916234016418,
+    "normal_probability": 0.8959916234016418,
+    "attack_probability": 0.10400831699371338,
+    "anomaly_score": 0.747822642326355
+  },
+  {
+    "sequence_id": 23,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9999922513961792,
+    "normal_probability": 7.703231858613435e-06,
+    "attack_probability": 0.9999922513961792,
+    "anomaly_score": 0.9829972982406616
+  },
+  {
+    "sequence_id": 24,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9998281002044678,
+    "normal_probability": 0.0001719098654575646,
+    "attack_probability": 0.9998281002044678,
+    "anomaly_score": 0.9757513999938965
+  },
+  {
+    "sequence_id": 25,
+    "true_label": 0,
+    "predicted_label": 0,
+    "confidence": 0.999990701675415,
+    "normal_probability": 0.999990701675415,
+    "attack_probability": 9.278255674871616e-06,
+    "anomaly_score": 0.9651689529418945
+  },
+  {
+    "sequence_id": 26,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9999964237213135,
+    "normal_probability": 3.6026740417582914e-06,
+    "attack_probability": 0.9999964237213135,
+    "anomaly_score": 0.9794158935546875
+  },
+  {
+    "sequence_id": 27,
+    "true_label": 0,
+    "predicted_label": 0,
+    "confidence": 0.9999911785125732,
+    "normal_probability": 0.9999911785125732,
+    "attack_probability": 8.808372513158247e-06,
+    "anomaly_score": 0.9654616117477417
+  },
+  {
+    "sequence_id": 28,
+    "true_label": 0,
+    "predicted_label": 0,
+    "confidence": 0.9999898672103882,
+    "normal_probability": 0.9999898672103882,
+    "attack_probability": 1.0137355275219306e-05,
+    "anomaly_score": 0.9658640623092651
+  },
+  {
+    "sequence_id": 29,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9996022582054138,
+    "normal_probability": 0.00039777220808900893,
+    "attack_probability": 0.9996022582054138,
+    "anomaly_score": 0.8064161539077759
+  },
+  {
+    "sequence_id": 30,
+    "true_label": 0,
+    "predicted_label": 0,
+    "confidence": 0.999991774559021,
+    "normal_probability": 0.999991774559021,
+    "attack_probability": 8.237666406785138e-06,
+    "anomaly_score": 0.9654475450515747
+  },
+  {
+    "sequence_id": 31,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9482951164245605,
+    "normal_probability": 0.05170486494898796,
+    "attack_probability": 0.9482951164245605,
+    "anomaly_score": 0.6744335293769836
+  },
+  {
+    "sequence_id": 32,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.8692486882209778,
+    "normal_probability": 0.13075131177902222,
+    "attack_probability": 0.8692486882209778,
+    "anomaly_score": 0.6075982451438904
+  },
+  {
+    "sequence_id": 33,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9971916079521179,
+    "normal_probability": 0.002808353863656521,
+    "attack_probability": 0.9971916079521179,
+    "anomaly_score": 0.8414737582206726
+  },
+  {
+    "sequence_id": 34,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.8090282082557678,
+    "normal_probability": 0.19097182154655457,
+    "attack_probability": 0.8090282082557678,
+    "anomaly_score": 0.6628972887992859
+  },
+  {
+    "sequence_id": 35,
+    "true_label": 0,
+    "predicted_label": 0,
+    "confidence": 0.9999920129776001,
+    "normal_probability": 0.9999920129776001,
+    "attack_probability": 7.981497219589073e-06,
+    "anomaly_score": 0.9656264185905457
+  },
+  {
+    "sequence_id": 36,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9999880790710449,
+    "normal_probability": 1.1908816304639913e-05,
+    "attack_probability": 0.9999880790710449,
+    "anomaly_score": 0.958049476146698
+  },
+  {
+    "sequence_id": 37,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9999973773956299,
+    "normal_probability": 2.6646632704796502e-06,
+    "attack_probability": 0.9999973773956299,
+    "anomaly_score": 0.9823010563850403
+  },
+  {
+    "sequence_id": 38,
+    "true_label": 0,
+    "predicted_label": 0,
+    "confidence": 0.9999916553497314,
+    "normal_probability": 0.9999916553497314,
+    "attack_probability": 8.329080628755037e-06,
+    "anomaly_score": 0.9660309553146362
+  },
+  {
+    "sequence_id": 39,
+    "true_label": 0,
+    "predicted_label": 0,
+    "confidence": 0.9999920129776001,
+    "normal_probability": 0.9999920129776001,
+    "attack_probability": 8.039126441872213e-06,
+    "anomaly_score": 0.9655892252922058
+  },
+  {
+    "sequence_id": 40,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9999862909317017,
+    "normal_probability": 1.3733265404880513e-05,
+    "attack_probability": 0.9999862909317017,
+    "anomaly_score": 0.9636632800102234
+  },
+  {
+    "sequence_id": 41,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.92535001039505,
+    "normal_probability": 0.07464992254972458,
+    "attack_probability": 0.92535001039505,
+    "anomaly_score": 0.40209531784057617
+  },
+  {
+    "sequence_id": 42,
+    "true_label": 0,
+    "predicted_label": 0,
+    "confidence": 0.9999927282333374,
+    "normal_probability": 0.9999927282333374,
+    "attack_probability": 7.315108177863294e-06,
+    "anomaly_score": 0.9665359258651733
+  },
+  {
+    "sequence_id": 43,
+    "true_label": 0,
+    "predicted_label": 0,
+    "confidence": 0.9999920129776001,
+    "normal_probability": 0.9999920129776001,
+    "attack_probability": 8.004128176253289e-06,
+    "anomaly_score": 0.9632261991500854
+  },
+  {
+    "sequence_id": 44,
+    "true_label": 0,
+    "predicted_label": 0,
+    "confidence": 0.9999926090240479,
+    "normal_probability": 0.9999926090240479,
+    "attack_probability": 7.402408300549723e-06,
+    "anomaly_score": 0.966051459312439
+  },
+  {
+    "sequence_id": 45,
+    "true_label": 0,
+    "predicted_label": 0,
+    "confidence": 0.9999880790710449,
+    "normal_probability": 0.9999880790710449,
+    "attack_probability": 1.1956805792578962e-05,
+    "anomaly_score": 0.9594135284423828
+  },
+  {
+    "sequence_id": 46,
+    "true_label": 0,
+    "predicted_label": 0,
+    "confidence": 0.999990701675415,
+    "normal_probability": 0.999990701675415,
+    "attack_probability": 9.32299553824123e-06,
+    "anomaly_score": 0.9639541506767273
+  },
+  {
+    "sequence_id": 47,
+    "true_label": 0,
+    "predicted_label": 0,
+    "confidence": 0.9999927282333374,
+    "normal_probability": 0.9999927282333374,
+    "attack_probability": 7.302435733436141e-06,
+    "anomaly_score": 0.9670500755310059
+  },
+  {
+    "sequence_id": 48,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9999904632568359,
+    "normal_probability": 9.485753253102303e-06,
+    "attack_probability": 0.9999904632568359,
+    "anomaly_score": 0.9695338010787964
+  },
+  {
+    "sequence_id": 49,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9960870742797852,
+    "normal_probability": 0.003912903368473053,
+    "attack_probability": 0.9960870742797852,
+    "anomaly_score": 0.8860677480697632
+  },
+  {
+    "sequence_id": 50,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.7609640955924988,
+    "normal_probability": 0.23903585970401764,
+    "attack_probability": 0.7609640955924988,
+    "anomaly_score": 0.5929915308952332
+  },
+  {
+    "sequence_id": 51,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9987722039222717,
+    "normal_probability": 0.0012277488131076097,
+    "attack_probability": 0.9987722039222717,
+    "anomaly_score": 0.9239242672920227
+  },
+  {
+    "sequence_id": 52,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9876729846000671,
+    "normal_probability": 0.012327034957706928,
+    "attack_probability": 0.9876729846000671,
+    "anomaly_score": 0.6527786254882812
+  },
+  {
+    "sequence_id": 53,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9988806843757629,
+    "normal_probability": 0.0011193527607247233,
+    "attack_probability": 0.9988806843757629,
+    "anomaly_score": 0.8251738548278809
+  },
+  {
+    "sequence_id": 54,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.952574610710144,
+    "normal_probability": 0.04742542281746864,
+    "attack_probability": 0.952574610710144,
+    "anomaly_score": 0.6388777494430542
+  },
+  {
+    "sequence_id": 55,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9999428987503052,
+    "normal_probability": 5.7100678532151505e-05,
+    "attack_probability": 0.9999428987503052,
+    "anomaly_score": 0.9302738904953003
+  },
+  {
+    "sequence_id": 56,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9999923706054688,
+    "normal_probability": 7.611222372361226e-06,
+    "attack_probability": 0.9999923706054688,
+    "anomaly_score": 0.9656801223754883
+  },
+  {
+    "sequence_id": 57,
+    "true_label": 0,
+    "predicted_label": 0,
+    "confidence": 0.9999899864196777,
+    "normal_probability": 0.9999899864196777,
+    "attack_probability": 9.964812306861859e-06,
+    "anomaly_score": 0.9640771746635437
+  },
+  {
+    "sequence_id": 58,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.7627943158149719,
+    "normal_probability": 0.2372056543827057,
+    "attack_probability": 0.7627943158149719,
+    "anomaly_score": 0.6034063100814819
+  },
+  {
+    "sequence_id": 59,
+    "true_label": 0,
+    "predicted_label": 1,
+    "confidence": 0.5502626895904541,
+    "normal_probability": 0.4497373402118683,
+    "attack_probability": 0.5502626895904541,
+    "anomaly_score": 0.5621731281280518
+  },
+  {
+    "sequence_id": 60,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9999972581863403,
+    "normal_probability": 2.7721964670490706e-06,
+    "attack_probability": 0.9999972581863403,
+    "anomaly_score": 0.9823273420333862
+  },
+  {
+    "sequence_id": 61,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9999957084655762,
+    "normal_probability": 4.301023636799073e-06,
+    "attack_probability": 0.9999957084655762,
+    "anomaly_score": 0.9794155359268188
+  },
+  {
+    "sequence_id": 62,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9989789724349976,
+    "normal_probability": 0.0010210619075223804,
+    "attack_probability": 0.9989789724349976,
+    "anomaly_score": 0.9664602279663086
+  },
+  {
+    "sequence_id": 63,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9400861859321594,
+    "normal_probability": 0.05991380289196968,
+    "attack_probability": 0.9400861859321594,
+    "anomaly_score": 0.6480480432510376
+  },
+  {
+    "sequence_id": 64,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.999994158744812,
+    "normal_probability": 5.874825092178071e-06,
+    "attack_probability": 0.999994158744812,
+    "anomaly_score": 0.9591293334960938
+  },
+  {
+    "sequence_id": 65,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9948701858520508,
+    "normal_probability": 0.005129843484610319,
+    "attack_probability": 0.9948701858520508,
+    "anomaly_score": 0.8688035011291504
+  },
+  {
+    "sequence_id": 66,
+    "true_label": 1,
+    "predicted_label": 0,
+    "confidence": 0.9234817624092102,
+    "normal_probability": 0.9234817624092102,
+    "attack_probability": 0.07651829719543457,
+    "anomaly_score": 0.6339662671089172
+  },
+  {
+    "sequence_id": 67,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9969007968902588,
+    "normal_probability": 0.0030992343090474606,
+    "attack_probability": 0.9969007968902588,
+    "anomaly_score": 0.8362070322036743
+  },
+  {
+    "sequence_id": 68,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9999954700469971,
+    "normal_probability": 4.5658484850719105e-06,
+    "attack_probability": 0.9999954700469971,
+    "anomaly_score": 0.9726073145866394
+  },
+  {
+    "sequence_id": 69,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9307595491409302,
+    "normal_probability": 0.0692404955625534,
+    "attack_probability": 0.9307595491409302,
+    "anomaly_score": 0.6744664311408997
+  },
+  {
+    "sequence_id": 70,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.887373685836792,
+    "normal_probability": 0.11262627691030502,
+    "attack_probability": 0.887373685836792,
+    "anomaly_score": 0.5290347337722778
+  },
+  {
+    "sequence_id": 71,
+    "true_label": 0,
+    "predicted_label": 0,
+    "confidence": 0.9999914169311523,
+    "normal_probability": 0.9999914169311523,
+    "attack_probability": 8.595274266554043e-06,
+    "anomaly_score": 0.9650943875312805
+  },
+  {
+    "sequence_id": 72,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9818416833877563,
+    "normal_probability": 0.018158312886953354,
+    "attack_probability": 0.9818416833877563,
+    "anomaly_score": 0.8906608819961548
+  },
+  {
+    "sequence_id": 73,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9999899864196777,
+    "normal_probability": 9.995307664212305e-06,
+    "attack_probability": 0.9999899864196777,
+    "anomaly_score": 0.9816217422485352
+  },
+  {
+    "sequence_id": 74,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9997677206993103,
+    "normal_probability": 0.00023230067745316774,
+    "attack_probability": 0.9997677206993103,
+    "anomaly_score": 0.903250515460968
+  },
+  {
+    "sequence_id": 75,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9999916553497314,
+    "normal_probability": 8.29340388008859e-06,
+    "attack_probability": 0.9999916553497314,
+    "anomaly_score": 0.9605273008346558
+  },
+  {
+    "sequence_id": 76,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9786422252655029,
+    "normal_probability": 0.02135780081152916,
+    "attack_probability": 0.9786422252655029,
+    "anomaly_score": 0.6534191370010376
+  },
+  {
+    "sequence_id": 77,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9999760389328003,
+    "normal_probability": 2.391413363511674e-05,
+    "attack_probability": 0.9999760389328003,
+    "anomaly_score": 0.9876224398612976
+  },
+  {
+    "sequence_id": 78,
+    "true_label": 0,
+    "predicted_label": 0,
+    "confidence": 0.9999920129776001,
+    "normal_probability": 0.9999920129776001,
+    "attack_probability": 7.960789844219107e-06,
+    "anomaly_score": 0.96595299243927
+  },
+  {
+    "sequence_id": 79,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.994650661945343,
+    "normal_probability": 0.005349377170205116,
+    "attack_probability": 0.994650661945343,
+    "anomaly_score": 0.9411457180976868
+  },
+  {
+    "sequence_id": 80,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.6953865885734558,
+    "normal_probability": 0.30461347103118896,
+    "attack_probability": 0.6953865885734558,
+    "anomaly_score": 0.5845041275024414
+  },
+  {
+    "sequence_id": 81,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9999101161956787,
+    "normal_probability": 8.989279012894258e-05,
+    "attack_probability": 0.9999101161956787,
+    "anomaly_score": 0.9342598915100098
+  },
+  {
+    "sequence_id": 82,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9998486042022705,
+    "normal_probability": 0.00015132015687413514,
+    "attack_probability": 0.9998486042022705,
+    "anomaly_score": 0.9577239155769348
+  },
+  {
+    "sequence_id": 83,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9999933242797852,
+    "normal_probability": 6.717347787343897e-06,
+    "attack_probability": 0.9999933242797852,
+    "anomaly_score": 0.9637295603752136
+  },
+  {
+    "sequence_id": 84,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9999955892562866,
+    "normal_probability": 4.414918294060044e-06,
+    "attack_probability": 0.9999955892562866,
+    "anomaly_score": 0.9849373698234558
+  },
+  {
+    "sequence_id": 85,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9999654293060303,
+    "normal_probability": 3.459332219790667e-05,
+    "attack_probability": 0.9999654293060303,
+    "anomaly_score": 0.9202485084533691
+  },
+  {
+    "sequence_id": 86,
+    "true_label": 0,
+    "predicted_label": 0,
+    "confidence": 0.9999910593032837,
+    "normal_probability": 0.9999910593032837,
+    "attack_probability": 8.919419087760616e-06,
+    "anomaly_score": 0.9651086926460266
+  },
+  {
+    "sequence_id": 87,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9459318518638611,
+    "normal_probability": 0.05406810715794563,
+    "attack_probability": 0.9459318518638611,
+    "anomaly_score": 0.7098504304885864
+  },
+  {
+    "sequence_id": 88,
+    "true_label": 0,
+    "predicted_label": 0,
+    "confidence": 0.9999915361404419,
+    "normal_probability": 0.9999915361404419,
+    "attack_probability": 8.452660949842539e-06,
+    "anomaly_score": 0.9649575352668762
+  },
+  {
+    "sequence_id": 89,
+    "true_label": 0,
+    "predicted_label": 0,
+    "confidence": 0.999980092048645,
+    "normal_probability": 0.999980092048645,
+    "attack_probability": 1.9886017980752513e-05,
+    "anomaly_score": 0.9484493136405945
+  },
+  {
+    "sequence_id": 90,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9999234676361084,
+    "normal_probability": 7.648800237802789e-05,
+    "attack_probability": 0.9999234676361084,
+    "anomaly_score": 0.9358962178230286
+  },
+  {
+    "sequence_id": 91,
+    "true_label": 0,
+    "predicted_label": 0,
+    "confidence": 0.9999901056289673,
+    "normal_probability": 0.9999901056289673,
+    "attack_probability": 9.920940101437736e-06,
+    "anomaly_score": 0.9654615521430969
+  },
+  {
+    "sequence_id": 92,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9999959468841553,
+    "normal_probability": 4.0095501390169375e-06,
+    "attack_probability": 0.9999959468841553,
+    "anomaly_score": 0.9733977317810059
+  },
+  {
+    "sequence_id": 93,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9996200799942017,
+    "normal_probability": 0.0003799512342084199,
+    "attack_probability": 0.9996200799942017,
+    "anomaly_score": 0.9245022535324097
+  },
+  {
+    "sequence_id": 94,
+    "true_label": 1,
+    "predicted_label": 0,
+    "confidence": 0.7323488593101501,
+    "normal_probability": 0.7323488593101501,
+    "attack_probability": 0.26765117049217224,
+    "anomaly_score": 0.5796278119087219
+  },
+  {
+    "sequence_id": 95,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9997088313102722,
+    "normal_probability": 0.00029112710035406053,
+    "attack_probability": 0.9997088313102722,
+    "anomaly_score": 0.80865877866745
+  },
+  {
+    "sequence_id": 96,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9984685778617859,
+    "normal_probability": 0.0015313558978959918,
+    "attack_probability": 0.9984685778617859,
+    "anomaly_score": 0.8015077710151672
+  },
+  {
+    "sequence_id": 97,
+    "true_label": 0,
+    "predicted_label": 0,
+    "confidence": 0.9999902248382568,
+    "normal_probability": 0.9999902248382568,
+    "attack_probability": 9.716942258819472e-06,
+    "anomaly_score": 0.9617339372634888
+  },
+  {
+    "sequence_id": 98,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9999949932098389,
+    "normal_probability": 5.035802587372018e-06,
+    "attack_probability": 0.9999949932098389,
+    "anomaly_score": 0.9753290414810181
+  },
+  {
+    "sequence_id": 99,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.999984860420227,
+    "normal_probability": 1.5095813068910502e-05,
+    "attack_probability": 0.999984860420227,
+    "anomaly_score": 0.9782673716545105
   }
 ]

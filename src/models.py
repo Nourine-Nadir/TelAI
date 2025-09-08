@@ -20,7 +20,6 @@ class AnomalyTransformer(nn.Module):
         return out
 
 
-import torch.nn as nn
 import torch
 import math
 
