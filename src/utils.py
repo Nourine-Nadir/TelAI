@@ -39,3 +39,19 @@ class FlowDataset(Dataset):
 
     def __getitem__(self, idx):
         return self.X[idx], self.y[idx]
+
+
+def preprocess_single_sequence(df_row, scaler=None, feature_columns=None):
+    """Preprocess a single row for prediction"""
+    if feature_columns is None:
+        # Select only numeric features
+        feature_columns = df_row.select_dtypes(include=[np.number]).columns
+
+    # Extract features
+    features = df_row[feature_columns].fillna(0).values.astype(np.float32)
+
+    # Normalize (you might want to save the scaler during training)
+    if scaler is not None:
+        features = scaler.transform(features.reshape(1, -1)).flatten()
+
+    return features

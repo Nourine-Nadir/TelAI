@@ -1,0 +1,92 @@
+[
+  {
+    "sequence_id": 0,
+    "true_label": 1,
+    "predicted_label": 0,
+    "confidence": 0.8648250699043274,
+    "normal_probability": 0.8648250699043274,
+    "attack_probability": 0.13517487049102783,
+    "anomaly_score": 0.6519062519073486
+  },
+  {
+    "sequence_id": 1,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9439536929130554,
+    "normal_probability": 0.05604628473520279,
+    "attack_probability": 0.9439536929130554,
+    "anomaly_score": 0.7061307430267334
+  },
+  {
+    "sequence_id": 2,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9307727217674255,
+    "normal_probability": 0.0692271962761879,
+    "attack_probability": 0.9307727217674255,
+    "anomaly_score": 0.6768704652786255
+  },
+  {
+    "sequence_id": 3,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.8005772233009338,
+    "normal_probability": 0.19942283630371094,
+    "attack_probability": 0.8005772233009338,
+    "anomaly_score": 0.6364824175834656
+  },
+  {
+    "sequence_id": 4,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9513083100318909,
+    "normal_probability": 0.04869172349572182,
+    "attack_probability": 0.9513083100318909,
+    "anomaly_score": 0.6867927312850952
+  },
+  {
+    "sequence_id": 5,
+    "true_label": 0,
+    "predicted_label": 0,
+    "confidence": 0.9200083017349243,
+    "normal_probability": 0.9200083017349243,
+    "attack_probability": 0.07999175041913986,
+    "anomaly_score": 0.6267549395561218
+  },
+  {
+    "sequence_id": 6,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9379409551620483,
+    "normal_probability": 0.06205900385975838,
+    "attack_probability": 0.9379409551620483,
+    "anomaly_score": 0.6843938827514648
+  },
+  {
+    "sequence_id": 7,
+    "true_label": 0,
+    "predicted_label": 0,
+    "confidence": 0.9204613566398621,
+    "normal_probability": 0.9204613566398621,
+    "attack_probability": 0.07953868061304092,
+    "anomaly_score": 0.6365659236907959
+  },
+  {
+    "sequence_id": 8,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9426092505455017,
+    "normal_probability": 0.0573907345533371,
+    "attack_probability": 0.9426092505455017,
+    "anomaly_score": 0.7044426202774048
+  },
+  {
+    "sequence_id": 9,
+    "true_label": 1,
+    "predicted_label": 1,
+    "confidence": 0.9360783100128174,
+    "normal_probability": 0.06392171233892441,
+    "attack_probability": 0.9360783100128174,
+    "anomaly_score": 0.678997814655304
+  }
+]
