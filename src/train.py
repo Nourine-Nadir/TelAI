@@ -5,8 +5,8 @@ from tqdm import tqdm
 import torch
 
 
-def train_model(train_dl, val_dl, input_dim, epochs=10, lr=1e-3, device="cuda"):
-    model = AnomalyTransformer(input_dim=input_dim).to(device)
+def train_model(train_dl, val_dl, input_dim, epochs=10, lr=1e-3, device="cuda", num_classes=10):
+    model = AnomalyTransformer(input_dim=input_dim, num_classes=10).to(device)
     opt = Adam(model.parameters(), lr=lr)
     criterion = nn.CrossEntropyLoss()
 

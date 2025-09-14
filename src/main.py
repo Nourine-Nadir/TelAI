@@ -9,10 +9,10 @@ from torch.utils.data import random_split, DataLoader
 import torch
 from tqdm import tqdm
 
-def main_centralized():
+def main_centralized(multiclass=False):
     """Centralized training"""
-    X, y = preprocess_unsw("../Data/UNSW-NB15/UNSW_NB15_training-set.csv", seq_len=15)
-    X_test, y_test = preprocess_unsw("../Data/UNSW-NB15/UNSW_NB15_testing-set.csv", seq_len=15)
+    X, y = preprocess_unsw("../Data/UNSW-NB15/UNSW_NB15_training-set.csv", seq_len=15 , multiclass=multiclass)
+    X_test, y_test = preprocess_unsw("../Data/UNSW-NB15/UNSW_NB15_testing-set.csv", seq_len=15 , multiclass=multiclass)
 
     dataset_train = FlowDataset(X, y)
     n_train = int(0.8 * len(dataset_train))
@@ -33,11 +33,11 @@ def main_centralized():
     evaluate_model(model, test_dl, device=device)
 
 
-def main_federated():
+def main_federated(multiclass=True):
     """Federated learning approach"""
     SEQ_LEN = 1
-    X, y = preprocess_unsw("../Data/UNSW-NB15/UNSW_NB15_training-set.csv", seq_len=SEQ_LEN)
-    X_test, y_test = preprocess_unsw("../Data/UNSW-NB15/UNSW_NB15_testing-set.csv", seq_len=SEQ_LEN)
+    X, y = preprocess_unsw("../Data/UNSW-NB15/UNSW_NB15_training-set.csv", seq_len=SEQ_LEN, multiclass=multiclass)
+    X_test, y_test = preprocess_unsw("../Data/UNSW-NB15/UNSW_NB15_testing-set.csv", seq_len=SEQ_LEN, multiclass=multiclass)
 
     # Create full training dataset
     dataset_train = FlowDataset(X, y)
@@ -53,19 +53,20 @@ def main_federated():
 
     # Federated learning setup
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    num_clients = 10  # Number of clients/silos
+    num_clients = 3 # Number of clients/silos
 
     # Create client dataloaders
     client_dataloaders = create_client_dataloaders(train_ds, num_clients, batch_size=1024)
 
     # Initialize global model
-    global_model = AnomalyAwareTransformer(input_dim=X.shape[2]).to(device)
+    num_classes = 10 if multiclass else 2
+    global_model = AnomalyAwareTransformer(input_dim=X.shape[2], num_classes=num_classes).to(device)
 
     # Initialize federated learning server
     server = FederatedLearningServer(global_model, num_clients, device)
 
     # Federated training
-    num_rounds = 20
+    num_rounds = 100
     epochs_per_client = 10
 
     for round_idx in tqdm(range(num_rounds), desc="Federated Rounds"):
@@ -92,12 +93,12 @@ def main_federated():
     try:
         os.makedirs('saved_models', exist_ok=True)
         # Save global model weights after training
-        torch.save(server.global_model.state_dict(), "saved_models/federated_model_seq1_.pth")
+        torch.save(server.global_model.state_dict(), "saved_models/federated_model_seq1_multiclass.pth")
         print('Model Saved !')
     except:
         print('Couldn\'t save the model !' )
 
-    evaluate_model(server.global_model, test_dl, device=device)
+    evaluate_model(server.global_model, test_dl, device=device, multiclass=multiclass)
 
 
 if __name__ == "__main__":

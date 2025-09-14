@@ -18,13 +18,12 @@ if __name__ == "__main__":
     with open('predictions.json', 'r') as file:
         data = json.load(file)
 
-    y_test = data[15]["predicted_label"]
-    print('X_test: ', X_test[15])
-    print('X_test shape: ', X_test[15].shape)
+    SEQ_ID = 50
+    y_test = data[SEQ_ID]["predicted_label"]
     print('y_test: ', y_test)
-    conf = data[15]["confidence"]
+    conf = data[SEQ_ID]["confidence"]
     print("Testing RAG explainer with local Ollama models...")
-    result = explainer.explain_anomaly(X_test[15][0], prediction=y_test, confidence=conf)
+    result = explainer.explain_anomaly(X_test[SEQ_ID][0], prediction=y_test, confidence=conf)
 
     print("\n" + "=" * 60)
     print("ANOMALY EXPLANATION RESULTS:")

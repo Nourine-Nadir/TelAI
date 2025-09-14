@@ -5,15 +5,30 @@ from torch.utils.data import Dataset
 from sklearn.preprocessing import LabelEncoder
 
 
-def preprocess_unsw(path:str, seq_len:int=50, normalize:bool=True):
+def preprocess_unsw(path: str, seq_len: int = 50, normalize: bool = True, multiclass: bool = False):
     df = pd.read_csv(path)
 
-    # Extract labels
-    if "attack_cat" in df.columns:
-        y = df["label"].astype(int).values  # 0 = normal, 1 = attack
-        df = df.drop(["attack_cat", "label", 'id'], axis=1)
+    # Extract labels based on multiclass flag
+    if multiclass:
+        # Multi-class: use attack_cat column
+        if "attack_cat" in df.columns:
+            # Map attack categories to numerical labels
+            attack_categories = ['Normal', 'Fuzzers', 'Analysis', 'Backdoor', 'DoS',
+                                 'Exploits', 'Generic', 'Reconnaissance', 'Shellcode', 'Worms']
+            category_to_label = {cat: idx for idx, cat in enumerate(attack_categories)}
+
+            # Convert attack_cat to numerical labels
+            y = df["attack_cat"].map(category_to_label).fillna(0).astype(int).values
+        else:
+            y = np.zeros(len(df))
     else:
-        y = np.zeros(len(df))
+        # Binary: use label column
+        if "attack_cat" in df.columns:
+            y = df["label"].astype(int).values  # 0 = normal, 1 = attack
+        else:
+            y = np.zeros(len(df))
+
+    df = df.drop(["attack_cat", "label", 'id'], axis=1, errors='ignore')
 
     for col in ["proto", "service", "state"]:
         if col in df.columns:
@@ -30,10 +45,18 @@ def preprocess_unsw(path:str, seq_len:int=50, normalize:bool=True):
     sequences, labels = [], []
     for i in range(0, len(X) - seq_len, seq_len):
         sequences.append(X[i:i + seq_len])
-        labels.append(int(y[i:i + seq_len].max()))  # label = 1 if any anomaly inside window
+        # For multi-class, use the most frequent class in the window
+        if multiclass:
+            window_labels = y[i:i + seq_len]
+            if len(window_labels) > 0:
+                labels.append(np.bincount(window_labels).argmax())
+            else:
+                labels.append(0)
+        else:
+            # Binary: label = 1 if any anomaly inside window
+            labels.append(int(y[i:i + seq_len].max()))
 
     return np.array(sequences, dtype=np.float32), np.array(labels, dtype=np.int64)
-
 
 class FlowDataset(Dataset):
     def __init__(self, X, y):

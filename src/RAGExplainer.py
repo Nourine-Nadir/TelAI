@@ -12,7 +12,6 @@ class AnomalyRAGExplainer:
         self.generator_model_name = "deepseek-r1:14b"
 
         # Load or create knowledge base
-        print(f'knowledge_base_path: {knowledge_base_path}')
         self.knowledge_base = self._load_knowledge_base(knowledge_base_path)
         self.feature_interpretations = self.knowledge_base.get("feature_interpretations", {})
         self.anomaly_types = self.knowledge_base.get("knowledge_base", [])
@@ -60,7 +59,7 @@ class AnomalyRAGExplainer:
             try:
                 with open(path, 'r') as f:
                     knowledge_base = json.load(f)
-                    print('Loading knowledge base... ', knowledge_base)
+                    print('Loading knowledge base... ')
                     return knowledge_base
 
             except:
@@ -154,6 +153,8 @@ class AnomalyRAGExplainer:
                     result["profile_based"] = True
                     results.append(result)
                     break
+
+        print(f'results {results}')
 
         return results
 

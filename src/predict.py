@@ -58,12 +58,13 @@ def predict_single_sequence(model, sequence, device="cuda"):
 
 def main():
     parser = argparse.ArgumentParser(description='Predict network anomalies using trained model')
-    parser.add_argument('--model_path', type=str, default='saved_models/federated_model_seq1.pth', required=False, help='Path to trained model')
+    parser.add_argument('--model_path', type=str, default='saved_models/federated_model_seq1_best.pth', required=False, help='Path to trained model')
     parser.add_argument('--data_path', type=str,default='../Data/UNSW-NB15/UNSW_NB15_testing-set.csv', required=False, help='Path to test CSV file')
     parser.add_argument('--seq_len', type=int, default=5, help='Sequence length')
     parser.add_argument('--num_samples', type=int, default=100, help='Number of samples to predict')
     parser.add_argument('--output_file', type=str, default='predictions.json', help='Output file for predictions')
     parser.add_argument('--batch_size', type=int, default=32, help='Batch size for prediction')
+    parser.add_argument('--multiclass', action='store_true', help='Use multi-class classification')
 
     args = parser.parse_args()
 
@@ -73,7 +74,14 @@ def main():
 
     # Load and preprocess data
     print("Loading and preprocessing data...")
-    X_test, y_test = preprocess_unsw(args.data_path, seq_len=args.seq_len)
+    X_test, y_test = preprocess_unsw(args.data_path, seq_len=args.seq_len, multiclass=args.multiclass)
+
+    # Update class names for output
+    if args.multiclass:
+        class_names = ['Normal', 'Fuzzers', 'Analysis', 'Backdoor', 'DoS',
+                       'Exploits', 'Generic', 'Reconnaissance', 'Shellcode', 'Worms']
+    else:
+        class_names = ["Normal", "Attack"]
 
     # Take a subset if specified
     if args.num_samples < len(X_test):
