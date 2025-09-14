@@ -6,22 +6,25 @@ from RAGExplainer import AnomalyRAGExplainer
 # Test the updated implementation
 if __name__ == "__main__":
     # Initialize explainer with local models
-    explainer = AnomalyRAGExplainer(knowledge_base_path='knowledge.json')
+    explainer = AnomalyRAGExplainer(knowledge_base_path='knowledge.json',profiles_path='attack_profiles.json')
 
     # Test with sample features
     # example_features = np.random.randn(20)  # Simulated feature vector
 
     print("Loading and preprocessing data...")
-    X_test, _ = preprocess_unsw('../Data/UNSW-NB15/UNSW_NB15_testing-set.csv', seq_len=5)
+    X_test, _ = preprocess_unsw('../Data/UNSW-NB15/UNSW_NB15_testing-set.csv', seq_len=1, normalize=True)
     #
 
     with open('predictions.json', 'r') as file:
         data = json.load(file)
 
-    y_test = data[0]["predicted_label"]
-    conf = data[0]["confidence"]
+    y_test = data[15]["predicted_label"]
+    print('X_test: ', X_test[15])
+    print('X_test shape: ', X_test[15].shape)
+    print('y_test: ', y_test)
+    conf = data[15]["confidence"]
     print("Testing RAG explainer with local Ollama models...")
-    result = explainer.explain_anomaly(X_test[0][0], prediction=y_test, confidence=conf)
+    result = explainer.explain_anomaly(X_test[15][0], prediction=y_test, confidence=conf)
 
     print("\n" + "=" * 60)
     print("ANOMALY EXPLANATION RESULTS:")

@@ -104,5 +104,217 @@
                 "severity": "None",
                 "examples": ["Web browsing", "Email traffic", "File transfers", "Database queries"]
             }
-        ]
+        ],
+  "feature_interpretations": {
+    "0": {
+      "name": "Connection duration",
+      "description": "Duration of the network connection",
+      "attack_context": "Long durations may indicate persistent C2 connections or data exfiltration"
+    },
+    "1": {
+      "name": "Protocol type",
+      "description": "Network protocol used (TCP/UDP/ICMP/etc)",
+      "attack_context": "Unusual protocols may indicate evasion techniques"
+    },
+    "2": {
+      "name": "Service type",
+      "description": "Network service (HTTP/FTP/DNS/etc)",
+      "attack_context": "Unexpected services may indicate service scanning or exploitation"
+    },
+    "3": {
+      "name": "Connection state",
+      "description": "State of the connection (ESTABLISHED/CONNECTING/etc)",
+      "attack_context": "Abnormal states may indicate connection manipulation"
+    },
+    "4": {
+      "name": "Source packets",
+      "description": "Number of packets from source to destination",
+      "attack_context": "High counts may indicate DoS flooding or scanning"
+    },
+    "5": {
+      "name": "Destination packets",
+      "description": "Number of packets from destination to source",
+      "attack_context": "Low counts during attacks may indicate one-way traffic"
+    },
+    "6": {
+      "name": "Source bytes",
+      "description": "Number of data bytes from source to destination",
+      "attack_context": "Large volumes may indicate data exfiltration or DoS attacks"
+    },
+    "7": {
+      "name": "Destination bytes",
+      "description": "Number of data bytes from destination to source",
+      "attack_context": "Small volumes may indicate reconnaissance activity"
+    },
+    "8": {
+      "name": "Packet rate",
+      "description": "Rate of packets per second",
+      "attack_context": "Extremely high rates indicate DoS attacks"
+    },
+    "9": {
+      "name": "Source TTL",
+      "description": "Time-to-live value of source IP packets",
+      "attack_context": "TTL manipulation may indicate OS fingerprinting or evasion"
+    },
+    "10": {
+      "name": "Destination TTL",
+      "description": "Time-to-live value of destination IP packets",
+      "attack_context": "Abnormal TTL values may suggest spoofing"
+    },
+    "11": {
+      "name": "Source load",
+      "description": "Source bits per second",
+      "attack_context": "Abnormal loads may indicate various attacks including brute force"
+    },
+    "12": {
+      "name": "Destination load",
+      "description": "Destination bits per second",
+      "attack_context": "Unexpected loads may indicate resource targeting or exploitation"
+    },
+    "13": {
+      "name": "Source packet loss",
+      "description": "Number of retransmitted or lost source packets",
+      "attack_context": "High loss may indicate network congestion or attack"
+    },
+    "14": {
+      "name": "Destination packet loss",
+      "description": "Number of retransmitted or lost destination packets",
+      "attack_context": "Loss patterns may indicate targeted attacks"
+    },
+    "15": {
+      "name": "Source inter-packet time",
+      "description": "Time between source packets (ms)",
+      "attack_context": "Short times may indicate flooding, regular intervals may indicate C2"
+    },
+    "16": {
+      "name": "Destination inter-packet time",
+      "description": "Time between destination packets (ms)",
+      "attack_context": "Irregular times may indicate malicious activity"
+    },
+    "17": {
+      "name": "Source jitter",
+      "description": "Variation in source inter-packet times",
+      "attack_context": "High jitter may indicate fuzzing or malformed packets"
+    },
+    "18": {
+      "name": "Destination jitter",
+      "description": "Variation in destination inter-packet times",
+      "attack_context": "Irregular responses may indicate service stress"
+    },
+    "19": {
+      "name": "Source TCP window",
+      "description": "TCP window size of source",
+      "attack_context": "Abnormal window sizes may indicate exploitation attempts"
+    },
+    "20": {
+      "name": "Source TCP base",
+      "description": "TCP base sequence number of source",
+      "attack_context": "Sequence anomalies may indicate hijacking"
+    },
+    "21": {
+      "name": "Destination TCP base",
+      "description": "TCP base sequence number of destination",
+      "attack_context": "Sequence issues may indicate attacks"
+    },
+    "22": {
+      "name": "Destination TCP window",
+      "description": "TCP window size of destination",
+      "attack_context": "Window size manipulation may indicate attacks"
+    },
+    "23": {
+      "name": "TCP RTT",
+      "description": "TCP round-trip time",
+      "attack_context": "Abnormal RTT may indicate network manipulation or congestion"
+    },
+    "24": {
+      "name": "SYN-ACK time",
+      "description": "Time between SYN and SYN-ACK packets",
+      "attack_context": "Long times may indicate half-open connections (DoS)"
+    },
+    "25": {
+      "name": "ACK data time",
+      "description": "Time between ACK and data packets",
+      "attack_context": "Timing anomalies may indicate protocol violations"
+    },
+    "26": {
+      "name": "Source mean",
+      "description": "Mean of source packet sizes",
+      "attack_context": "Unusual mean sizes may indicate specific attack payloads"
+    },
+    "27": {
+      "name": "Destination mean",
+      "description": "Mean of destination packet sizes",
+      "attack_context": "Packet size patterns may indicate attack types"
+    },
+    "28": {
+      "name": "Transaction depth",
+      "description": "Depth of transaction (for HTTP/FTP)",
+      "attack_context": "Abnormal depths may indicate HTTP exploits or web attacks"
+    },
+    "29": {
+      "name": "Response body length",
+      "description": "Length of response body content",
+      "attack_context": "Unexpected lengths may indicate successful exploits or data leakage"
+    },
+    "30": {
+      "name": "Service-source count",
+      "description": "Number of connections for same service and source",
+      "attack_context": "High counts suggest port scanning (Reconnaissance)"
+    },
+    "31": {
+      "name": "State-TTL count",
+      "description": "Number of connections for same state and TTL",
+      "attack_context": "Patterns may indicate scanning or fingerprinting"
+    },
+    "32": {
+      "name": "Destination count",
+      "description": "Number of connections for same destination",
+      "attack_context": "Multiple connections to same target suggest scanning or DoS"
+    },
+    "33": {
+      "name": "Source-dest port count",
+      "description": "Number of connections for same source and destination port",
+      "attack_context": "Patterns may indicate specific service attacks"
+    },
+    "34": {
+      "name": "Dest-source port count",
+      "description": "Number of connections for same destination and source port",
+      "attack_context": "Connection patterns may reveal attack vectors"
+    },
+    "35": {
+      "name": "Destination-source count",
+      "description": "Number of connections for same destination and source",
+      "attack_context": "Relationship patterns may indicate compromised systems"
+    },
+    "36": {
+      "name": "FTP login",
+      "description": "Whether FTP login was attempted (1/0)",
+      "attack_context": "Multiple attempts suggest brute force attacks"
+    },
+    "37": {
+      "name": "FTP commands",
+      "description": "Number of FTP commands",
+      "attack_context": "Unusual commands may indicate FTP exploits or unauthorized access"
+    },
+    "38": {
+      "name": "HTTP methods",
+      "description": "Number of HTTP methods",
+      "attack_context": "Unusual methods may indicate web application attacks"
+    },
+    "39": {
+      "name": "Source count",
+      "description": "Number of connections for same source",
+      "attack_context": "High counts from single source suggest infected host or scanning"
+    },
+    "40": {
+      "name": "Service-destination count",
+      "description": "Number of connections for same service and destination",
+      "attack_context": "High counts may indicate service-specific attacks"
+    },
+    "41": {
+      "name": "Same IPs and ports",
+      "description": "Whether source and destination IPs/ports are same (1/0)",
+      "attack_context": "Reflection attacks or self-connections may indicate malware"
+    }
+  }
 }

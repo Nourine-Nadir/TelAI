@@ -6,7 +6,7 @@ import time
 
 
 class AnomalyRAGExplainer:
-    def __init__(self, knowledge_base_path: str = None):
+    def __init__(self, knowledge_base_path: str = None, profiles_path: str = None):
         # Use local Ollama models instead of HF models
         self.embedding_model_name = "nomic-embed-text"
         self.generator_model_name = "deepseek-r1:14b"
@@ -14,6 +14,13 @@ class AnomalyRAGExplainer:
         # Load or create knowledge base
         print(f'knowledge_base_path: {knowledge_base_path}')
         self.knowledge_base = self._load_knowledge_base(knowledge_base_path)
+        self.feature_interpretations = self.knowledge_base.get("feature_interpretations", {})
+        self.anomaly_types = self.knowledge_base.get("knowledge_base", [])
+
+        self.attack_profiles = {}
+        if profiles_path:
+            self._load_attack_profiles(profiles_path)
+
         self.embeddings = None
 
         if self.knowledge_base:
@@ -52,54 +59,107 @@ class AnomalyRAGExplainer:
         if path:
             try:
                 with open(path, 'r') as f:
-                    knowledge_base = json.load(f)['knowledge_base']
+                    knowledge_base = json.load(f)
                     print('Loading knowledge base... ', knowledge_base)
                     return knowledge_base
 
             except:
                 print("Could not load knowledge base, using UNSW-NB15 default")
 
+    def _load_feature_interpretations(self, path: str) -> List[Dict]:
+        if path:
+            try:
+                with open(path, 'r') as f:
+                    feature_desc = json.load(f)['feature_interpretations']
+                    print('Loading feature_interpretations... ', feature_desc)
+                    return feature_desc
 
+            except:
+                print("Could not load feature_interpretations, using UNSW-NB15 default")
 
     def _embed_knowledge_base(self):
-        """Create embeddings for knowledge base using local model"""
-        print("Embedding knowledge base with nomic-embed-text...")
+        """Create embeddings for anomaly types only"""
+        print("Embedding anomaly knowledge base with nomic-embed-text...")
         self.embeddings = []
 
-        for item in self.knowledge_base:
+        for item in self.anomaly_types:
             text = f"{item['anomaly_type']}: {item['description']}. Features: {', '.join(item['features'])}"
             embedding = self._embed_text(text)
             self.embeddings.append(embedding)
-            time.sleep(0.1)  # Small delay to avoid overwhelming Ollama
+            time.sleep(0.1)
 
         self.embeddings = np.array(self.embeddings)
-        print("Knowledge base embedding completed!")
+        print("Anomaly knowledge base embedding completed!")
+
+    def _load_attack_profiles(self, profiles_path: str):
+        """Load precomputed attack profiles"""
+        try:
+            with open(profiles_path, 'r') as f:
+                profiles_data = json.load(f)
+
+            self.attack_profiles = profiles_data.get('feature_profiles', {})
+            self.feature_means = np.array(profiles_data.get('feature_means', []))
+            self.feature_stds = np.array(profiles_data.get('feature_stds', []))
+
+            print(f"Loaded attack profiles for {len(self.attack_profiles)} types")
+
+        except Exception as e:
+            print(f"Could not load attack profiles: {e}")
+            self.attack_profiles = {}
 
     def retrieve_similar_anomalies(self, feature_vector: np.array, top_k: int = 3) -> List[Dict]:
-        """Retrieve most similar anomalies from knowledge base"""
-        if self.embeddings is None or len(self.embeddings) == 0:
-            return self.knowledge_base[:top_k]
+        """Retrieve similar anomalies using actual feature profiles"""
+        if not self.attack_profiles:
+            return self._fallback_retrieval(top_k)
 
-        # Convert features to text description for embedding
-        feature_text = f"Network traffic with features: {', '.join([f'feature_{i}={v:.3f}' for i, v in enumerate(feature_vector[:10])])}"  # Use first 10 features for brevity
+        # Normalize the input feature vector using stored statistics
+        if hasattr(self, 'feature_means') and hasattr(self, 'feature_stds'):
+            if len(feature_vector) == len(self.feature_means):
+                feature_vector = (feature_vector - self.feature_means) / self.feature_stds
 
-        query_embedding = np.array(self._embed_text(feature_text))
+        # Compute absolute values (abnormality scores)
+        abs_features = np.abs(feature_vector)
+        feature_profile = abs_features / (np.sum(abs_features) + 1e-8)
 
-        # Calculate similarities
-        similarities = np.dot(self.embeddings, query_embedding) / (
-                np.linalg.norm(self.embeddings, axis=1) * np.linalg.norm(query_embedding)
-        )
+        # Calculate similarities with each attack profile
+        similarities = {}
+        for attack_type, profile_data in self.attack_profiles.items():
+            if attack_type == 'Normal':
+                continue  # Skip normal traffic
 
-        # Get top-k most similar
-        top_indices = similarities.argsort()[-top_k:][::-1]
+            attack_profile = np.array(profile_data['profile'])
+
+            # Ensure profiles have same length
+            min_len = min(len(feature_profile), len(attack_profile))
+            feat_profile_trunc = feature_profile[:min_len]
+            attack_profile_trunc = attack_profile[:min_len]
+
+            # Calculate cosine similarity
+            similarity = np.dot(feat_profile_trunc, attack_profile_trunc) / (
+                    np.linalg.norm(feat_profile_trunc) * np.linalg.norm(attack_profile_trunc) + 1e-8
+            )
+
+            similarities[attack_type] = similarity
+
+        # Get top-k most similar attacks
+        sorted_attacks = sorted(similarities.items(), key=lambda x: x[1], reverse=True)[:top_k]
 
         results = []
-        for idx in top_indices:
-            result = self.knowledge_base[idx].copy()
-            result["similarity_score"] = float(similarities[idx])
-            results.append(result)
+        for attack_type, similarity in sorted_attacks:
+            # Find matching anomaly in knowledge base
+            for anomaly in self.anomaly_types:
+                if anomaly['anomaly_type'] == attack_type:
+                    result = anomaly.copy()
+                    result["similarity_score"] = float(similarity)
+                    result["profile_based"] = True
+                    results.append(result)
+                    break
 
         return results
+
+    def _fallback_retrieval(self, top_k: int):
+        """Fallback if no profiles are available"""
+        return self.anomaly_types[:min(top_k, len(self.anomaly_types))]
 
     def generate_explanation(self, feature_vector: np.array, prediction: int, confidence: float,
                              retrieved_anomalies: List[Dict]) -> str:
@@ -109,7 +169,7 @@ class AnomalyRAGExplainer:
         context = "\n".join([
             f"Anomaly Type: {anom['anomaly_type']}\n"
             f"Description: {anom['description']}\n"
-            f"Key Features: {', '.join(anom['features'][:3])}\n"
+            f"Key Features: {', '.join(anom['features'][:5])}\n"
             f"Remediation: {anom['remediation']}\n"
             f"Severity: {anom['severity']}\n"
             f"Similarity Score: {anom.get('similarity_score', 0):.3f}\n"
@@ -163,7 +223,7 @@ Provide a structured analysis in 3-4 paragraphs.
     def explain_anomaly(self, feature_vector: np.array, prediction: int, confidence: float) -> Dict:
         """Complete RAG explanation pipeline"""
         # Retrieve similar anomalies
-        retrieved = self.retrieve_similar_anomalies(feature_vector)
+        retrieved = self.retrieve_similar_anomalies(feature_vector, top_k=5)
 
         # Generate explanation
         explanation = self.generate_explanation(feature_vector, prediction, confidence, retrieved)
@@ -192,129 +252,16 @@ Provide a structured analysis in 3-4 paragraphs.
         ]
 
     def _interpret_feature(self, index: int, value: float) -> str:
-        """Provide interpretation of UNSW-NB15 feature values with attack context"""
+        """Provide interpretation using JSON knowledge base"""
+        index_str = str(index)
 
-        # UNSW-NB15 feature interpretations
-        interpretations = {
-            # Basic connection features
-            0: ("Connection duration", "Duration of the network connection",
-                "Long durations may indicate persistent C2 connections or data exfiltration"),
-            1: ("Protocol type", "Network protocol used (TCP/UDP/ICMP/etc)",
-                "Unusual protocols may indicate evasion techniques"),
-            2: ("Service type", "Network service (HTTP/FTP/DNS/etc)",
-                "Unexpected services may indicate service scanning or exploitation"),
-            3: ("Connection state", "State of the connection (ESTABLISHED/CONNECTING/etc)",
-                "Abnormal states may indicate connection manipulation"),
+        if index_str in self.feature_interpretations:
+            feat_info = self.feature_interpretations[index_str]
+            name = feat_info.get("name", f"Feature {index}")
+            description = feat_info.get("description", "")
+            attack_context = feat_info.get("attack_context", "Network behavior indicator")
 
-            # Packet statistics
-            4: ("Source packets", "Number of packets from source to destination",
-                "High counts may indicate DoS flooding or scanning"),
-            5: ("Destination packets", "Number of packets from destination to source",
-                "Low counts during attacks may indicate one-way traffic"),
-            6: ("Source bytes", "Number of data bytes from source to destination",
-                "Large volumes may indicate data exfiltration or DoS attacks"),
-            7: ("Destination bytes", "Number of data bytes from destination to source",
-                "Small volumes may indicate reconnaissance activity"),
-            8: ("Packet rate", "Rate of packets per second", "Extremely high rates indicate DoS attacks"),
-
-            # Time-to-Live (TTL) values
-            9: ("Source TTL", "Time-to-live value of source IP packets",
-                "TTL manipulation may indicate OS fingerprinting or evasion"),
-            10: ("Destination TTL", "Time-to-live value of destination IP packets",
-                 "Abnormal TTL values may suggest spoofing"),
-
-            # Load and throughput
-            11: ("Source load", "Source bits per second",
-                 "Abnormal loads may indicate various attacks including brute force"),
-            12: ("Destination load", "Destination bits per second",
-                 "Unexpected loads may indicate resource targeting or exploitation"),
-
-            # Packet loss
-            13: ("Source packet loss", "Number of retransmitted or lost source packets",
-                 "High loss may indicate network congestion or attack"),
-            14: ("Destination packet loss", "Number of retransmitted or lost destination packets",
-                 "Loss patterns may indicate targeted attacks"),
-
-            # Inter-packet timing
-            15: ("Source inter-packet time", "Time between source packets (ms)",
-                 "Short times may indicate flooding, regular intervals may indicate C2"),
-            16: ("Destination inter-packet time", "Time between destination packets (ms)",
-                 "Irregular times may indicate malicious activity"),
-            17: ("Source jitter", "Variation in source inter-packet times",
-                 "High jitter may indicate fuzzing or malformed packets"),
-            18: ("Destination jitter", "Variation in destination inter-packet times",
-                 "Irregular responses may indicate service stress"),
-
-            # TCP window sizes
-            19: ("Source TCP window", "TCP window size of source",
-                 "Abnormal window sizes may indicate exploitation attempts"),
-            20: ("Source TCP base", "TCP base sequence number of source", "Sequence anomalies may indicate hijacking"),
-            21: (
-                "Destination TCP base", "TCP base sequence number of destination",
-                "Sequence issues may indicate attacks"),
-            22: ("Destination TCP window", "TCP window size of destination",
-                 "Window size manipulation may indicate attacks"),
-
-            # TCP timing metrics
-            23: ("TCP RTT", "TCP round-trip time", "Abnormal RTT may indicate network manipulation or congestion"),
-            24: ("SYN-ACK time", "Time between SYN and SYN-ACK packets",
-                 "Long times may indicate half-open connections (DoS)"),
-            25: (
-                "ACK data time", "Time between ACK and data packets",
-                "Timing anomalies may indicate protocol violations"),
-
-            # Mean values
-            26: (
-                "Source mean", "Mean of source packet sizes",
-                "Unusual mean sizes may indicate specific attack payloads"),
-            27: (
-                "Destination mean", "Mean of destination packet sizes",
-                "Packet size patterns may indicate attack types"),
-
-            # Transaction depth
-            28: ("Transaction depth", "Depth of transaction (for HTTP/FTP)",
-                 "Abnormal depths may indicate HTTP exploits or web attacks"),
-
-            # Response body
-            29: ("Response body length", "Length of response body content",
-                 "Unexpected lengths may indicate successful exploits or data leakage"),
-
-            # Connection tracking features
-            30: ("Service-source count", "Number of connections for same service and source",
-                 "High counts suggest port scanning (Reconnaissance)"),
-            31: ("State-TTL count", "Number of connections for same state and TTL",
-                 "Patterns may indicate scanning or fingerprinting"),
-            32: ("Destination count", "Number of connections for same destination",
-                 "Multiple connections to same target suggest scanning or DoS"),
-            33: ("Source-dest port count", "Number of connections for same source and destination port",
-                 "Patterns may indicate specific service attacks"),
-            34: ("Dest-source port count", "Number of connections for same destination and source port",
-                 "Connection patterns may reveal attack vectors"),
-            35: ("Destination-source count", "Number of connections for same destination and source",
-                 "Relationship patterns may indicate compromised systems"),
-
-            # FTP features
-            36: ("FTP login", "Whether FTP login was attempted (1/0)", "Multiple attempts suggest brute force attacks"),
-            37: ("FTP commands", "Number of FTP commands",
-                 "Unusual commands may indicate FTP exploits or unauthorized access"),
-
-            # HTTP features
-            38: ("HTTP methods", "Number of HTTP methods", "Unusual methods may indicate web application attacks"),
-
-            # Additional connection tracking
-            39: ("Source count", "Number of connections for same source",
-                 "High counts from single source suggest infected host or scanning"),
-            40: ("Service-destination count", "Number of connections for same service and destination",
-                 "High counts may indicate service-specific attacks"),
-            41: ("Same IPs and ports", "Whether source and destination IPs/ports are same (1/0)",
-                 "Reflection attacks or self-connections may indicate malware")
-        }
-
-        # Get the interpretation or default
-        if index in interpretations:
-            feature_name, description, attack_context = interpretations[index]
-
-            # Add value-based interpretation with attack context
+            # Add value-based interpretation
             abs_value = abs(value)
             if abs_value > 2.0:
                 magnitude = "extremely "
@@ -334,7 +281,7 @@ Provide a structured analysis in 3-4 paragraphs.
 
             direction = "above" if value > 0 else "below"
 
-            return f"{feature_name} ({magnitude}{direction} normal - {severity}) - {attack_context}"
+            return f"{name} ({magnitude}{direction} normal - {severity}) - {attack_context}"
 
         else:
             # Fallback for unknown features

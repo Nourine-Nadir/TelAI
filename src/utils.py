@@ -5,7 +5,7 @@ from torch.utils.data import Dataset
 from sklearn.preprocessing import LabelEncoder
 
 
-def preprocess_unsw(path, seq_len=50):
+def preprocess_unsw(path:str, seq_len:int=50, normalize:bool=True):
     df = pd.read_csv(path)
 
     # Extract labels
@@ -22,8 +22,9 @@ def preprocess_unsw(path, seq_len=50):
 
     # Keep only numeric features
     X = df.select_dtypes(include=[np.number]).fillna(0).values
-    # Normalize
-    X = (X - X.mean(axis=0)) / (X.std(axis=0) + 1e-8)
+    if normalize:
+        # Normalize
+        X = (X - X.mean(axis=0)) / (X.std(axis=0) + 1e-8)
 
     # Slice into fixed-length sequences
     sequences, labels = [], []

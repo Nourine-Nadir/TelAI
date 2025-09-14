@@ -20,8 +20,8 @@ def main_centralized():
     train_ds, val_ds = random_split(dataset_train, [n_train, n_val],
                                     generator=torch.Generator().manual_seed(42))
 
-    train_dl = DataLoader(train_ds, batch_size=512, shuffle=True)
-    val_dl = DataLoader(val_ds, batch_size=512, shuffle=False)
+    train_dl = DataLoader(train_ds, batch_size=1024, shuffle=True)
+    val_dl = DataLoader(val_ds, batch_size=1024, shuffle=False)
 
     # Train
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -29,14 +29,15 @@ def main_centralized():
 
     # Evaluate
     dataset_test = FlowDataset(X_test, y_test)
-    test_dl = DataLoader(dataset_test, batch_size=512, shuffle=False)
+    test_dl = DataLoader(dataset_test, batch_size=1024, shuffle=False)
     evaluate_model(model, test_dl, device=device)
 
 
 def main_federated():
     """Federated learning approach"""
-    X, y = preprocess_unsw("../Data/UNSW-NB15/UNSW_NB15_training-set.csv", seq_len=1)
-    X_test, y_test = preprocess_unsw("../Data/UNSW-NB15/UNSW_NB15_testing-set.csv", seq_len=1)
+    SEQ_LEN = 1
+    X, y = preprocess_unsw("../Data/UNSW-NB15/UNSW_NB15_training-set.csv", seq_len=SEQ_LEN)
+    X_test, y_test = preprocess_unsw("../Data/UNSW-NB15/UNSW_NB15_testing-set.csv", seq_len=SEQ_LEN)
 
     # Create full training dataset
     dataset_train = FlowDataset(X, y)
@@ -48,14 +49,14 @@ def main_federated():
                                     generator=torch.Generator().manual_seed(42))
 
     # Create validation dataloader
-    val_dl = DataLoader(val_ds, batch_size=512, shuffle=False)
+    val_dl = DataLoader(val_ds, batch_size=1024, shuffle=False)
 
     # Federated learning setup
     device = "cuda" if torch.cuda.is_available() else "cpu"
     num_clients = 10  # Number of clients/silos
 
     # Create client dataloaders
-    client_dataloaders = create_client_dataloaders(train_ds, num_clients, batch_size=512)
+    client_dataloaders = create_client_dataloaders(train_ds, num_clients, batch_size=1024)
 
     # Initialize global model
     global_model = AnomalyAwareTransformer(input_dim=X.shape[2]).to(device)
@@ -64,7 +65,7 @@ def main_federated():
     server = FederatedLearningServer(global_model, num_clients, device)
 
     # Federated training
-    num_rounds = 70
+    num_rounds = 20
     epochs_per_client = 10
 
     for round_idx in tqdm(range(num_rounds), desc="Federated Rounds"):
@@ -86,7 +87,7 @@ def main_federated():
 
     # Final evaluation
     dataset_test = FlowDataset(X_test, y_test)
-    test_dl = DataLoader(dataset_test, batch_size=512, shuffle=False)
+    test_dl = DataLoader(dataset_test, batch_size=1024, shuffle=False)
     print("Final Evaluation:")
     try:
         os.makedirs('saved_models', exist_ok=True)
