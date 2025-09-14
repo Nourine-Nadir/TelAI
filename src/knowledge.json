@@ -1,0 +1,108 @@
+{
+  "name": "src",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nourine-Nadir/TelAI.git"
+  },
+  "private": true,
+
+  "knowledge_base":
+          [
+            {
+                "anomaly_type": "Fuzzers",
+                "description": "Fuzzing attacks that send malformed or unexpected input to crash services or find vulnerabilities",
+                "features": ["irregular packet sizes", "multiple protocol violations", "unusual service requests",
+                             "high error rates"],
+                "remediation": "Input validation, protocol compliance checking, intrusion prevention systems",
+                "severity": "Medium-High",
+                "examples": ["Buffer overflow attempts", "Protocol fuzzing", "Input manipulation"]
+            },
+            {
+                "anomaly_type": "Analysis",
+                "description": "Traffic analysis and network mapping activities to gather intelligence about network structure",
+                "features": ["multiple port connections", "various protocol usage", "low traffic volume",
+                             "systematic scanning patterns"],
+                "remediation": "Network segmentation, port security, traffic monitoring for reconnaissance patterns",
+                "severity": "Medium",
+                "examples": ["Network mapping", "Service discovery", "Topology analysis"]
+            },
+            {
+                "anomaly_type": "Backdoors",
+                "description": "Unauthorized access channels created to bypass normal authentication mechanisms",
+                "features": ["unusual outbound connections", "encrypted traffic to unknown destinations",
+                             "persistent connections", "off-hours activity"],
+                "remediation": "Access control reviews, connection monitoring, malware scanning, firewall rules audit",
+                "severity": "Critical",
+                "examples": ["Trojan communications", "C2 channel activity", "Covert tunnels"]
+            },
+            {
+                "anomaly_type": "DoS",
+                "description": "Denial of Service attacks aimed at making resources unavailable to legitimate users",
+                "features": ["extremely high packet rates", "multiple source IPs", "small packet sizes",
+                             "resource exhaustion patterns"],
+                "remediation": "Rate limiting, traffic filtering, DDoS protection services, resource monitoring",
+                "severity": "High-Critical",
+                "examples": ["SYN floods", "UDP floods", "ICMP floods", "HTTP floods"]
+            },
+            {
+                "anomaly_type": "Exploits",
+                "description": "Attacks that exploit specific vulnerabilities in software or systems",
+                "features": ["targeted payload delivery", "specific service targeting",
+                             "vulnerability-specific patterns", "privilege escalation attempts"],
+                "remediation": "Patch management, vulnerability scanning, application firewall, least privilege principles",
+                "severity": "High",
+                "examples": ["Remote code execution", "SQL injection", "XSS attacks", "Privilege escalation"]
+            },
+            {
+                "anomaly_type": "Generic",
+                "description": "General attacks that don't fit specific categories but show clear malicious intent",
+                "features": ["multiple attack signatures", "mixed malicious patterns", "general suspicious behavior",
+                             "policy violations"],
+                "remediation": "General security hardening, behavior analysis, comprehensive logging, security awareness",
+                "severity": "Medium-High",
+                "examples": ["Multi-vector attacks", "General malware activity", "Policy violations"]
+            },
+            {
+                "anomaly_type": "Reconnaissance",
+                "description": "Information gathering activities to identify potential targets and vulnerabilities",
+                "features": ["systematic port scanning", "service enumeration", "network probing",
+                             "low-and-slow traffic patterns"],
+                "remediation": "Intrusion detection systems, honeypots, network monitoring, access logging",
+                "severity": "Low-Medium",
+                "examples": ["Port scanning", "Service discovery", "Network mapping", "Vulnerability scanning"]
+            },
+            {
+                "anomaly_type": "Shellcode",
+                "description": "Malicious code execution attempts through injected shellcode payloads",
+                "features": ["executable code in packets", "memory corruption patterns", "return-oriented programming",
+                             "payload obfuscation"],
+                "remediation": "Memory protection, executable space protection, code signing, behavior monitoring",
+                "severity": "High",
+                "examples": ["Buffer overflow exploits", "Code injection", "ROP chain attacks"]
+            },
+            {
+                "anomaly_type": "Worms",
+                "description": "Self-replicating malware that spreads through network vulnerabilities",
+                "features": ["rapid network propagation", "multiple infection attempts", "scanning behavior",
+                             "automatic replication"],
+                "remediation": "Patch management, network segmentation, behavior analysis, containment procedures",
+                "severity": "Critical",
+                "examples": ["Network worms", "Auto-replicating malware", "Lateral movement"]
+            },
+            {
+                "anomaly_type": "Normal",
+                "description": "Legitimate network traffic without malicious intent",
+                "features": ["consistent patterns", "expected protocols", "normal traffic volumes",
+                             "authorized services"],
+                "remediation": "Continue normal monitoring, maintain security baselines",
+                "severity": "None",
+                "examples": ["Web browsing", "Email traffic", "File transfers", "Database queries"]
+            }
+        ]
+}
