@@ -95,6 +95,7 @@ Based on the request, determine which actions to take and in what order. Conside
 2. What information do we need to gather first?
 3. What actions might solve the problem?
 4. What verification steps are needed?
+5. Use only Available tools [start_network, stop_network, connect_device, disconnect_device,get_network_status, get_system_logs]
 
 Respond with a JSON format only:
 {{
@@ -107,7 +108,7 @@ Respond with a JSON format only:
 Example:
 {{
     "reasoning": "The engineer reports a network issue. I'll first check the status, then look for anomalies, and finally check logs for details.",
-    "actions": ["get_network_status", "check_anomalies", "get_system_logs"],
+    "actions": ["get_network_status", "get_system_logs"],
     "device_id": null,
     "expected_outcome": "Identify the root cause of the network issue"
 }}
@@ -137,7 +138,7 @@ Now analyze this request:"""
                 # Fallback plan if JSON parsing fails
                 return {
                     "reasoning": "Default plan for network troubleshooting",
-                    "actions": ["get_network_status", "check_anomalies", "get_system_logs"],
+                    "actions": ["get_network_status", "get_system_logs"],
                     "device_id": None,
                     "expected_outcome": "Basic network assessment"
                 }
@@ -188,7 +189,6 @@ Now analyze this request:"""
 
             # Brief pause between actions
             time.sleep(0.5)
-        print(f'results {results}')
         return results
 
     def _generate_response(self, user_query: str, plan: dict, results: dict) -> str:

@@ -46,7 +46,7 @@ class NetworkSandbox:
                 'message': f'Request failed: {e}'
             }
 
-    def _retry_operation(self, operation_func, max_retries: int = 3, delay: float = 2.0,
+    def _retry_operation(self, operation_func, max_retries: int = 5, delay: float = 2.0,
                          operation_name: str = "operation") -> Dict[str, Any]:
         """Retry an operation until success or max retries reached"""
         for attempt in range(max_retries):
@@ -68,7 +68,7 @@ class NetworkSandbox:
 
     # Network Control Methods with retry capability
     def start_network(self, reason: str = "No reason", mode: str = "normal",
-                      max_retries: int = 3, retry_delay: float = 2.0) -> Dict[str, Any]:
+                      max_retries: int = 5, retry_delay: float = 2.0) -> Dict[str, Any]:
         """Start the network with retry logic"""
 
         def _start_operation():
@@ -78,7 +78,7 @@ class NetworkSandbox:
         return self._retry_operation(_start_operation, max_retries, retry_delay, "Starting network")
 
     def connect_device(self, device_id: str, device_type: str = "phone", priority: str = "normal",
-                       max_retries: int = 3, retry_delay: float = 2.0) -> Dict[str, Any]:
+                       max_retries: int = 5, retry_delay: float = 2.0) -> Dict[str, Any]:
         """Connect device with retry logic"""
 
         def _connect_operation():
@@ -95,7 +95,7 @@ class NetworkSandbox:
         return self._retry_operation(_connect_operation, max_retries, retry_delay, f"Connecting device {device_id}")
 
     def disconnect_device(self, device_id: str, reason: str = "admin_action",
-                         max_retries: int = 3, retry_delay: float = 2.0) -> Dict[str, Any]:
+                         max_retries: int = 5, retry_delay: float = 2.0) -> Dict[str, Any]:
         """Disconnect device with retry logic"""
 
         def _disconnect_operation():
@@ -108,7 +108,7 @@ class NetworkSandbox:
         return self._retry_operation(_disconnect_operation, max_retries, retry_delay, f"Disconnecting device {device_id}")
 
     def stop_network(self, reason: str = "maintenance", graceful: bool = True,
-                    max_retries: int = 3, retry_delay: float = 2.0) -> Dict[str, Any]:
+                    max_retries: int = 5, retry_delay: float = 2.0) -> Dict[str, Any]:
         """Stop the network with retry logic"""
 
         def _stop_operation():

@@ -37,7 +37,7 @@ Based on the OpenAPI specification, I implemented the six required endpoints:
 1. Network Control Operations:`start_network` and `stop_network`
 2. Device Management Operations: `connect_device` and `disconnect_device`
 3. Monitoring Operations: `get_network_status` and `get_system_logs`
-4. Utility Methods: `is_network_running`  and `wait_for_operation`
+4. (Optional) Utility Methods: `is_network_running`  and `wait_for_operation`
 
 #### Robust Error Handling and Retry Mechanism 
 A critical component I implemented was the `_retry_operation` method to ensure reliability in network operations
@@ -47,14 +47,11 @@ Before building the intelligent agent, I created comprehensive testing utilities
 ```
 import json
 from engine import NetworkSandbox
-
 def test_sandbox():
     ...
-    # Test starting the network with retry
     print("\n1. Starting network (with retry)...")
     result = sandbox.start_network(max_retries=5, retry_delay=2.0)
     print(f"Final result: {json.dumps(result, indent=2)}")
-
     ...
 ```
 
@@ -101,43 +98,104 @@ def interactive_mode(self):
 ```
 
 ## End-to-End Pipeline
-```mermaid
-graph TB
-    subgraph "Input Phase"
-        A[Engineer Natural Language Prompt] --> B[NetworkAgent.process_command]
-    end
+### Stage 1:Input Phase
+Engineer Natural Language Prompt → NetworkAgent.process_command()
+* Input: Raw natural language query from network engineer
 
-    subgraph "Planning Phase"
-        B --> C[Plan Generation with Ollama]
-        C --> D[JSON Plan Extraction]
-        D --> E[Structured Action Plan]
-    end
+* Processing: Command received by the main entry point `process_command()`
 
-    subgraph "Parameter Extraction"
-        E --> F[Device ID Pattern Matching]
-        F --> G[Validated Parameters]
-    end
+* Validation: Basic input sanitization and initialization
 
-    subgraph "Execution Phase"
-        G --> H[Sequential Action Execution]
-        H --> I[Tool Selection & Routing]
-        I --> J[API Calls via NetworkSandbox]
-        J --> K[Response Processing]
-    end
+* Example: "Why isn't John's phone connecting? His device ID is 90400"
 
-    subgraph "Response Generation"
-        K --> L[Results Aggregation]
-        L --> M[LLM Response Synthesis]
-        M --> N[Final Natural Language Answer]
-    end
+### Stage 2: Planning Phase
+Plan Generation with Ollama → JSON Plan Extraction → Structured Action Plan
 
-    subgraph "Output Phase"
-        N --> O[Engineer Response]
-    end
+* LLM Analysis: _generate_plan() uses Ollama to analyze the request context
 
-    style A fill:#e1f5fe
-    style O fill:#e8f5e8
-    style C fill:#fff3e0
-    style J fill:#f3e5f5
-```
+* JSON Schema: LLM produces structured plan following predefined format
 
+* Plan Validation: Regex-based JSON extraction with fallback defaults
+
+* Action Sequencing: Logical ordering based on dependencies (check status before actions)
+
+### Stage 3: Parameter Extraction
+Device ID Pattern Matching → Validated Parameters
+* Pattern Recognition: `_extract_device_id()` applies multiple regex patterns
+
+* Priority Handling: Device ID from plan takes precedence over extracted ID
+
+* Validation: Format verification before API usage
+
+### Stage 4: Execution Phase
+Sequential Action Execution → Tool Selection & Routing → API Calls → Response Processing
+
+* Action Dispatch: _execute_actions() iterates through planned actions
+
+* Tool Routing: Dynamic mapping to NetworkSandbox methods via tools registry
+
+* API Integration: Each action triggers corresponding endpoint call:
+
+  * `get_network_status` → `GET /network/status`
+
+  * `connect_device` → `POST /device/connect` with device parameters
+
+* Retry Logic: Automatic retry with exponential backoff for failed operations
+
+* Result Collection: Structured storage of success/failure outcomes
+
+### Stage 5: Response Generation
+Results Aggregation → LLM Response Synthesis → Final Natural Language Answer
+
+* Result Compilation: All action outcomes aggregated into structured summary
+
+* LLM Synthesis: _generate_response() uses Ollama to create human-readable response:
+
+  * Context: Original query + executed plan + results
+
+  * Format: Professional but friendly network operations style
+
+  * Content: Actions taken, findings, issues, recommendations
+
+* Quality Assurance: Temperature control (0.7) for natural yet consistent responses
+
+
+### Stage 6: Output Phase
+Final Natural Language Answer → Engineer Response
+
+* Delivery: Clean, formatted response returned to engineer
+
+* Logging: Full execution trace for debugging and audit
+
+* Performance Metrics: Execution time tracking and reporting
+
+## Future Enhancement Opportunities
+Given more time, I would implement:
+
+### Immediate Improvements (1-2 days)
+1. Conversation Memory: Maintain context across multiple interactions
+
+2. Advanced Diagnostics: Root cause analysis for common network issues
+
+3. Proactive Alerts: Automatic issue detection before user reports
+
+### Medium-term Enhancements (1-2 weeks)
+1. Multi-modal Integration: Support for visual network topology
+
+2. Performance Optimization: Caching and parallel execution
+
+3. Learning System: Historical data analysis for improvement
+
+### Long-term Vision (1+ month)
+1. Predictive Maintenance: AI-driven failure prediction
+
+2. Natural Language Generation: More conversational responses
+
+3. Integration Ecosystem: Plugins for other network management systems
+
+## Conclusion
+This design provides a scalable foundation for an intelligent network agent.
+It demonstrates pragmatic use of AI techniques to solve real-world operations problems.
+Future enhancements could include integration with actual network APIs, role-based access 
+control, and predictive analytics. The agent balances usability with technical feasibility, 
+aligning with the challenge’s goals.

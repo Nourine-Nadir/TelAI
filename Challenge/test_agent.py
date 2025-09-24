@@ -43,7 +43,7 @@ def test_agent_scenarios():
     print("2. deepseek-r1:14b")
     print("3. deepseek-r1:32b")
 
-    choice = input("Enter choice (1-4, default 1): ").strip()
+    choice = input("Enter choice (1-3, default 1): ").strip()
     model_map = {
         "1": "deepseek-r1:7b",
         "2": "deepseek-r1:14b",
