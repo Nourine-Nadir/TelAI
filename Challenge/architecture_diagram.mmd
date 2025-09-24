@@ -1,0 +1,37 @@
+graph TB
+    subgraph "Presentation Layer"
+        UI[Engineer Natural Language Commands]
+        CLI[Interactive CLI Interface]
+    end
+    
+    subgraph "Intelligent Agent Layer"
+        NA[NetworkAgent - Core Controller]
+        PL[Plan Generator - Ollama LLM]
+        EX[Action Executor]
+        RG[Response Generator]
+    end
+    
+    subgraph "Tool Abstraction Layer"
+        TS[Tool System - 6 Network Operations]
+        T1[Start Network]
+        T2[Stop Network]
+        T3[Get Status]
+        T4[Connect Device]
+        T5[Disconnect Device]
+        T6[Get Logs]
+    end
+    
+    subgraph "API Integration Layer"
+        NS[NetworkSandbox - HTTP Client]
+        API[5G Sandbox API]
+    end
+    
+    UI --> CLI
+    CLI --> NA
+    NA --> PL
+    PL --> EX
+    EX --> TS
+    TS --> NS
+    NS --> API
+    PL --> Ollama[Ollama LLM Service]
+    RG --> Ollama 

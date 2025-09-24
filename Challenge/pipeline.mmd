@@ -1,0 +1,37 @@
+graph TB
+    subgraph "Input Phase"
+        A[Engineer Natural Language Prompt] --> B[NetworkAgent.process_command]
+    end
+
+    subgraph "Planning Phase"
+        B --> C[Plan Generation with Ollama]
+        C --> D[JSON Plan Extraction]
+        D --> E[Structured Action Plan]
+    end
+
+    subgraph "Parameter Extraction"
+        E --> F[Device ID Pattern Matching]
+        F --> G[Validated Parameters]
+    end
+
+    subgraph "Execution Phase"
+        G --> H[Sequential Action Execution]
+        H --> I[Tool Selection & Routing]
+        I --> J[API Calls via NetworkSandbox]
+        J --> K[Response Processing]
+    end
+
+    subgraph "Response Generation"
+        K --> L[Results Aggregation]
+        L --> M[LLM Response Synthesis]
+        M --> N[Final Natural Language Answer]
+    end
+
+    subgraph "Output Phase"
+        N --> O[Engineer Response]
+    end
+
+    style A fill:#e1f5fe
+    style O fill:#e8f5e8
+    style C fill:#fff3e0
+    style J fill:#f3e5f5
